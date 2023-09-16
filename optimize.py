@@ -7,6 +7,7 @@ import copy
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+from variables import headers, biomarker_data, optimal_biomarker_data, biomarker_ranges
 
 
 def extract_predicted_age(html_content):
@@ -31,65 +32,18 @@ def send_post_request(data, headers):
     return response
 
 
-headers = {
-    "Accept":
-    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-    "Accept-Language":
-    "en-US,en;q=0.9",
-    "Cache-Control":
-    "max-age=0",
-    "Connection":
-    "keep-alive",
-    "Content-Type":
-    "application/x-www-form-urlencoded",
-    "Cookie":
-    "csrftoken=4SdAofEdCaohTw7FZ2uHprZ7z4GAHhRZ; sessionid=89yfwgsb4v16hziorghgvloznyv17nzq",
-    "DNT":
-    "1",
-    "Origin":
-    "http://aging.ai",
-    "Referer":
-    "http://aging.ai/aging-v3/?m=us",
-    "Upgrade-Insecure-Requests":
-    "1",
-    "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
-}
-
-data = {
-    "ethnicity": "western_europe",
-    "metric": "us",
-    "weight": "194",
-    "height": "72",
-    "smoke": "no",
-    "csrfmiddlewaretoken": "4SdAofEdCaohTw7FZ2uHprZ7z4GAHhRZ",
-    "Albumin": "4.7",
-    "Glucose": "96",
-    "Urea": "21",
-    "Cholesterol": "102",
-    "Protein_total": "6.8",
-    "Sodium": "140",
-    "Creatinine": "1.05",
-    "Hemoglobin": "14.1",
-    "Bilirubin_total": "0.4",
-    "Triglycerides": "43",
-    "HDL_Cholesterol": "59",
-    "LDL_cholesterol": "31",
-    "Calcium": "9.4",
-    "Potassium": "4.6",
-    "Hematocrit": "42.8",
-    "MCHC": "32.9",
-    "MCV": "88.4",
-    "Platelets": "211",
-    "Erythrocytes": "4.84"
-}
-
-
-def find_optimal_values(directory="predictions"):
-    # For each prediction file, print the value which results in the lowest predicted age
-    for filename in os.listdir(directory):
+def generate_plots():
+    for filename in os.listdir("predictions"):
         if filename.endswith('.json'):
-            filepath = os.path.join(directory, filename)
+            biomarker = filename.replace('.json', '')
+            calculate_regression(biomarker, show_plot=False, save_plot=True)
+
+
+def find_optimal_real_values():
+    # For each prediction file, print the value which results in the lowest predicted age
+    for filename in os.listdir("predictions"):
+        if filename.endswith('.json'):
+            filepath = os.path.join("predictions", filename)
             with open(filepath, 'r') as json_file:
                 age_predictions = json.load(json_file)
                 biomarker = age_predictions[0]['biomarker']
@@ -111,32 +65,148 @@ def find_optimal_values(directory="predictions"):
                       str(optimal_age_prediction["predicted_age"]))
 
 
+def calculate_2nd_degree(age_predictions, low_end, high_end):
+    x_list = [item['value'] for item in age_predictions]
+    y_list = [item['predicted_age'] for item in age_predictions]
+
+    x = np.array(x_list)
+    y = np.array(y_list)
+
+    coef2 = np.polyfit(x, y, 2)
+
+    x_calc = list(np.arange(low_end, high_end, (high_end - low_end) / 100))
+    y_calc = np.polyval(coef2, x_calc)
+
+    index_of_lowest_value = np.argmin(y_calc)
+    print(round(x_calc[index_of_lowest_value], 2))
+
+
+def find_optimal_calc_values():
+    print(len(biomarker_ranges))
+    for biomarker_range in biomarker_ranges:
+        biomarker = biomarker_range['biomarker']
+        low_end = biomarker_range['low_end']
+        high_end = biomarker_range['high_end']
+
+        print('Calculating optimal value for ' + biomarker)
+
+        age_predictions = []
+        with open("predictions/" + biomarker + ".json", 'r') as json_file:
+            age_predictions = json.load(json_file)
+
+        calculate_2nd_degree(age_predictions, low_end, high_end)
+
+
 def save_predictions(biomarker, age_predictions):
     with open("predictions/" + biomarker + ".json", "w") as file:
         json.dump(age_predictions, file)
 
 
-def calculate_regression(biomarker, degree):
+def calculate_coefficient_of_determination(x, y, degree):
+    # Compute the coefficients of the linear regression model
+    coef = np.polyfit(x, y, degree)
+
+    # Predict y values using the linear model
+    y_pred = np.polyval(coef, x)
+
+    # Calculate SSres
+    SS_res = np.sum((y - y_pred)**2)
+
+    # Calculate SStot
+    SS_tot = np.sum((y - np.mean(y))**2)
+
+    # Calculate R-squared
+    r2 = 1 - (SS_res / SS_tot)
+
+    #print(f"R-squared: {r2}")
+    return r2
+
+
+def calculate_regression(biomarker, show_plot=False, save_plot=True):
+    print('\nPlotting ' + biomarker)
+
     age_predictions = []
     with open("predictions/" + biomarker + ".json", 'r') as json_file:
         age_predictions = json.load(json_file)
 
-    x = np.array(list(age_predictions[1].values()))
-    y = np.array(list(age_predictions[2].values()))
+    x_list = [item['value'] for item in age_predictions]
+    y_list = [item['predicted_age'] for item in age_predictions]
 
-    coefficients = np.polyfit(x, y, degree)
-    polynomial = np.poly1d(coefficients)
+    x = np.array(x_list)
+    y = np.array(y_list)
 
-    # For plotting
-    xs = np.linspace(0, 5, 100)
-    ys = polynomial(xs)
+    coef1 = np.polyfit(x, y, 1)
+    m, b = coef1  # slope and intercept
+    y_pred1 = np.polyval(coef1, x)
+    rr1 = calculate_coefficient_of_determination(x, y, 1)
 
-    plt.scatter(x, y)
-    plt.plot(xs, ys, '-r')
-    plt.show()
+    # Fit 2nd degree polynomial
+    coef2 = np.polyfit(x, y, 2)
+    y_pred2 = np.polyval(coef2, x)
+    rr2 = calculate_coefficient_of_determination(x, y, 2)
+
+    # Fit 3rd degree polynomial
+    coef3 = np.polyfit(x, y, 3)
+    y_pred3 = np.polyval(coef3, x)
+    rr3 = calculate_coefficient_of_determination(x, y, 3)
+
+    # Plot the data
+    plt.scatter(x, y, color='blue', label='Data points')
+
+    # Plot the polynomial regression lines
+    plt.plot(x,
+             y_pred1,
+             color='red',
+             label=f'1st Degree: y = {m:.2f}x + {b:.2f} | RR: {rr1:.2f}')
+    plt.plot(
+        x,
+        y_pred2,
+        color='green',
+        label=
+        f'2nd Degree: y = {coef2[0]:.2f}x^2 + {coef2[1]:.2f}x + {coef2[2]:.2f} | RR: {rr2:.2f}'
+    )
+    plt.plot(
+        x,
+        y_pred3,
+        color='purple',
+        label=
+        f'3rd Degree: y = {coef3[0]:.2f}x^3 + {coef3[1]:.2f}x^2 + {coef3[2]:.2f}x + {coef3[3]:.2f} | RR: {rr3:.2f}'
+    )
+
+    print(f'1st Degree: y = {m:.2f}x + {b:.2f}')
+    print(f'RR: {rr1:.2f}')
+    print(
+        f'2nd Degree: y = {coef2[0]:.2f}x^2 + {coef2[1]:.2f}x + {coef2[2]:.2f}'
+    )
+    print(f'RR: {rr2:.2f}')
+    print(
+        f'3rd Degree: y = {coef3[0]:.2f}x^3 + {coef3[1]:.2f}x^2 + {coef3[2]:.2f}x + {coef3[3]:.2f}'
+    )
+    print(f'RR: {rr3:.2f}')
+
+    # Add a title to the plot
+    plt.title(biomarker)
+    plt.legend()
+    plt.grid(True)
+
+    if show_plot:
+        plt.show()
+    if save_plot:
+        # Save the plot to an image file with 300 DPI
+        plt.savefig('plots/' + biomarker + '.png', dpi=300)
+
+    plt.close('all')
 
 
-def test_levels(biomarker, low_end, high_end, step, data):
+def request_age(data):
+    response = send_post_request(data, headers)
+
+    html_content = response.text
+    predicted_age = extract_predicted_age(html_content)
+    return predicted_age
+
+
+def iterate_levels(biomarker, low_end, high_end, step, data):
     age_predictions = []
     data_copy = copy.copy(data)
 
@@ -147,10 +217,8 @@ def test_levels(biomarker, low_end, high_end, step, data):
         print("Calculating " + biomarker + " of " + str(i))
 
         # Request predicted age
-        response = send_post_request(data_copy, headers)
+        predicted_age = request_age(data_copy)
 
-        html_content = response.text
-        predicted_age = extract_predicted_age(html_content)
         print("Prediction age: " + str(predicted_age))
         age_predictions.append({
             "biomarker": biomarker,
@@ -164,70 +232,25 @@ def test_levels(biomarker, low_end, high_end, step, data):
     save_predictions(biomarker, age_predictions)
 
 
-def test_all_levels():
-    # 3.5 - 5.5 U/L
-    test_levels("Albumin", 3.5, 5.5, 0.1, data)
+def test_all_levels(biomarker_ranges, biomarker_data):
+    for biomarker_range in biomarker_ranges:
+        biomarker = biomarker_range['biomarker']
+        low_end = biomarker_range['low_end']
+        high_end = biomarker_range['high_end']
+        step = (high_end - low_end) / 20
 
-    # 65 - 99 mg/dL
-    test_levels("Glucose", 65.0, 99.0, 2, data)
-
-    # 6 - 24 mg/dL
-    test_levels("Urea", 6.0, 24.0, 1, data)
-
-    # 100 - 199 mg/dL
-    test_levels("Cholesterol", 100.0, 199.0, 5, data)
-
-    # 6.0 - 8.5 g/dL
-    test_levels("Protein_total", 6.0, 8.5, 0.1, data)
-
-    # 134 - 144 mmol/L
-    test_levels("Sodium", 134.0, 144.0, 0.5, data)
-
-    # 0.57 - 1.00 mg/dL
-    test_levels("Creatinine", 0.57, 1.00, 0.02, data)
-
-    # 11.1 - 15.9 g/dL
-    test_levels("Hemoglobin", 11.1, 15.9, 0.2, data)
-
-    # 0.0 - 1.2 mg/dL
-    test_levels("Bilirubin_total", 0.05, 1.2, 0.05, data)
-
-    # 0 - 149 mg/dL
-    test_levels("Triglycerides", 5.0, 149.0, 5, data)
-
-    # > 39 mg/dL
-    test_levels("HDL_Cholesterol", 39.0, 100.0, 2.5, data)
-
-    # 0 - 99 mg/dL
-    test_levels("LDL_cholesterol", 5.0, 99.0, 5, data)
-
-    # 8.7 - 10.2 mg/dL
-    test_levels("Calcium", 8.7, 10.2, 0.08, data)
-
-    # 3.5 - 5.2 mmol/L
-    test_levels("Potassium", 3.5, 5.2, 0.1, data)
-
-    # 37 - 50 %
-    test_levels("Hematocrit", 37.0, 50.0, 1, data)
-
-    # 31.5 - 35.7 g/dL
-    test_levels("MCHC", 31.5, 35.7, 0.25, data)
-
-    # 79 - 97 fL
-    test_levels("MCV", 79.0, 97.0, 1, data)
-
-    # 150-379 103 /uL
-    test_levels("Platelets", 150, 379, 10, data)
-
-    # 3.77 - 5.28 106 /uL
-    test_levels("Erythrocytes", 3.77, 5.28, 0.1, data)
-
-    # 150 - 220 106 lb
-    test_levels("weight", 150.0, 220.0, 2, data)
+        iterate_levels(biomarker, low_end, high_end, step, biomarker_data)
 
 
-# test_all_levels()
+# test_all_levels(biomarker_ranges, biomarker_data)
 
-calculate_regression("Albumin", 2)
+# calculate_regression("Protein_total")
 
 # find_optimal_values()
+
+# generate_plots()
+
+# find_optimal_calc_values()
+
+predicted_age = request_age(optimal_biomarker_data)
+print('Predicted age: ' + str(predicted_age))
