@@ -1,0 +1,132 @@
+[
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 39.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 41.5,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 44.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 46.5,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 49.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 51.5,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 54.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 56.5,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 59.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 61.5,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 64.0,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 66.5,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 69.0,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 71.5,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 74.0,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 76.5,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 79.0,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 81.5,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 84.0,
+        "predicted_age": 28.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 86.5,
+        "predicted_age": 28.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 89.0,
+        "predicted_age": 28.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 91.5,
+        "predicted_age": 29.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 94.0,
+        "predicted_age": 29.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 96.5,
+        "predicted_age": 29.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 99.0,
+        "predicted_age": 30.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "value": 101.5,
+        "predicted_age": 30.0
+    }
+]

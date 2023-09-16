@@ -1,0 +1,117 @@
+[
+    {
+        "biomarker": "Creatinine",
+        "value": 0.57,
+        "predicted_age": 18.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.59,
+        "predicted_age": 18.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.61,
+        "predicted_age": 19.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.63,
+        "predicted_age": 20.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.65,
+        "predicted_age": 20.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.67,
+        "predicted_age": 20.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.69,
+        "predicted_age": 20.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.71,
+        "predicted_age": 20.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.73,
+        "predicted_age": 20.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.75,
+        "predicted_age": 20.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.77,
+        "predicted_age": 21.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.79,
+        "predicted_age": 21.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.81,
+        "predicted_age": 21.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.83,
+        "predicted_age": 21.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.85,
+        "predicted_age": 21.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.87,
+        "predicted_age": 21.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.89,
+        "predicted_age": 22.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.91,
+        "predicted_age": 22.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.93,
+        "predicted_age": 22.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.95,
+        "predicted_age": 22.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.97,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 0.99,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "value": 1.01,
+        "predicted_age": 23.0
+    }
+]

@@ -1,0 +1,122 @@
+[
+    {
+        "biomarker": "Platelets",
+        "value": 150,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 160,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 170,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 180,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 190,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 200,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 210,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 220,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 230,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 240,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 250,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 260,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 270,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 280,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 290,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 300,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 310,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 320,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 330,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 340,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 350,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 360,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 370,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Platelets",
+        "value": 380,
+        "predicted_age": 24.0
+    }
+]

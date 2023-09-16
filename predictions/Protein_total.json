@@ -1,0 +1,132 @@
+[
+    {
+        "biomarker": "Protein_total",
+        "value": 6.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 6.1,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 6.2,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 6.3,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 6.4,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 6.5,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 6.6,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 6.7,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 6.8,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 6.9,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.1,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.2,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.3,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.4,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.5,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.6,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.7,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.8,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 7.9,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 8.0,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 8.1,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 8.2,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 8.3,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 8.4,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "value": 8.5,
+        "predicted_age": 27.0
+    }
+]

@@ -5,6 +5,8 @@ import numpy as np
 import json
 import copy
 import os
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 def extract_predicted_age(html_content):
@@ -104,14 +106,34 @@ def find_optimal_values(directory="predictions"):
                         optimal_age_prediction = age_prediction
 
                 print("The optimal value for " + biomarker + " of " +
-                      optimal_age_prediction["value"] +
+                      str(optimal_age_prediction["value"]) +
                       " results in a predicted age of " +
-                      optimal_age_prediction["predicted_age"])
+                      str(optimal_age_prediction["predicted_age"]))
 
 
 def save_predictions(biomarker, age_predictions):
     with open("predictions/" + biomarker + ".json", "w") as file:
         json.dump(age_predictions, file)
+
+
+def calculate_regression(biomarker, degree):
+    age_predictions = []
+    with open("predictions/" + biomarker + ".json", 'r') as json_file:
+        age_predictions = json.load(json_file)
+
+    x = np.array(list(age_predictions[1].values()))
+    y = np.array(list(age_predictions[2].values()))
+
+    coefficients = np.polyfit(x, y, degree)
+    polynomial = np.poly1d(coefficients)
+
+    # For plotting
+    xs = np.linspace(0, 5, 100)
+    ys = polynomial(xs)
+
+    plt.scatter(x, y)
+    plt.plot(xs, ys, '-r')
+    plt.show()
 
 
 def test_levels(biomarker, low_end, high_end, step, data):
@@ -168,16 +190,16 @@ def test_all_levels():
     test_levels("Hemoglobin", 11.1, 15.9, 0.2, data)
 
     # 0.0 - 1.2 mg/dL
-    test_levels("Bilirubin_total", 0.0, 1.2, 0.05, data)
+    test_levels("Bilirubin_total", 0.05, 1.2, 0.05, data)
 
     # 0 - 149 mg/dL
-    test_levels("Triglycerides", 0.0, 149.0, 5, data)
+    test_levels("Triglycerides", 5.0, 149.0, 5, data)
 
     # > 39 mg/dL
     test_levels("HDL_Cholesterol", 39.0, 100.0, 2.5, data)
 
     # 0 - 99 mg/dL
-    test_levels("LDL_cholesterol", 0.0, 99.0, 5, data)
+    test_levels("LDL_cholesterol", 5.0, 99.0, 5, data)
 
     # 8.7 - 10.2 mg/dL
     test_levels("Calcium", 8.7, 10.2, 0.08, data)
@@ -200,5 +222,12 @@ def test_all_levels():
     # 3.77 - 5.28 106 /uL
     test_levels("Erythrocytes", 3.77, 5.28, 0.1, data)
 
+    # 150 - 220 106 lb
+    test_levels("weight", 150.0, 220.0, 2, data)
 
-test_all_levels()
+
+# test_all_levels()
+
+calculate_regression("Albumin", 2)
+
+# find_optimal_values()

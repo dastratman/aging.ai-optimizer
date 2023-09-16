@@ -1,0 +1,122 @@
+[
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.05,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.1,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.15,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.2,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.25,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.3,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.35,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.4,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.45,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.5,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.55,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.6,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.65,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.7,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.75,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.8,
+        "predicted_age": 26.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.85,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.9,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 0.95,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 1.0,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 1.05,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 1.1,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 1.15,
+        "predicted_age": 27.0
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "value": 1.2,
+        "predicted_age": 27.0
+    }
+]

@@ -1,0 +1,92 @@
+[
+    {
+        "biomarker": "Potassium",
+        "value": 3.5,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 3.6,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 3.7,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 3.8,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 3.9,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.1,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.2,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.3,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.4,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.5,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.6,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.7,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.8,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 4.9,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 5.0,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 5.1,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "Potassium",
+        "value": 5.2,
+        "predicted_age": 25.0
+    }
+]

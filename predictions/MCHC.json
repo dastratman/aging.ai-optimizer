@@ -1,0 +1,92 @@
+[
+    {
+        "biomarker": "MCHC",
+        "value": 31.5,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 31.75,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 32.0,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 32.25,
+        "predicted_age": 25.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 32.5,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 32.75,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 33.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 33.25,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 33.5,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 33.75,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 34.0,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 34.25,
+        "predicted_age": 24.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 34.5,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 34.75,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 35.0,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 35.25,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 35.5,
+        "predicted_age": 23.0
+    },
+    {
+        "biomarker": "MCHC",
+        "value": 35.75,
+        "predicted_age": 23.0
+    }
+]
