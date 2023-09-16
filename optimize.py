@@ -23,7 +23,6 @@ def extract_predicted_age(html_content):
 
 
 def send_post_request(data, headers):
-
     url = "http://aging.ai/aging-v3/?m=us"
 
     response = requests.post(
@@ -136,53 +135,42 @@ def calculate_regression(biomarker, show_plot=False, save_plot=True):
     y = np.array(y_list)
 
     coef1 = np.polyfit(x, y, 1)
-    m, b = coef1  # slope and intercept
     y_pred1 = np.polyval(coef1, x)
-    rr1 = calculate_coefficient_of_determination(x, y, 1)
+    rr1 = round(calculate_coefficient_of_determination(x, y, 1), 2)
 
     # Fit 2nd degree polynomial
     coef2 = np.polyfit(x, y, 2)
     y_pred2 = np.polyval(coef2, x)
-    rr2 = calculate_coefficient_of_determination(x, y, 2)
+    rr2 = round(calculate_coefficient_of_determination(x, y, 2), 2)
 
     # Fit 3rd degree polynomial
     coef3 = np.polyfit(x, y, 3)
     y_pred3 = np.polyval(coef3, x)
-    rr3 = calculate_coefficient_of_determination(x, y, 3)
+    rr3 = round(calculate_coefficient_of_determination(x, y, 3), 2)
 
     # Plot the data
     plt.scatter(x, y, color='blue', label='Data points')
 
     # Plot the polynomial regression lines
-    plt.plot(x,
-             y_pred1,
-             color='red',
-             label=f'1st Degree: y = {m:.2f}x + {b:.2f} | RR: {rr1:.2f}')
-    plt.plot(
-        x,
-        y_pred2,
-        color='green',
-        label=
-        f'2nd Degree: y = {coef2[0]:.2f}x^2 + {coef2[1]:.2f}x + {coef2[2]:.2f} | RR: {rr2:.2f}'
-    )
-    plt.plot(
-        x,
-        y_pred3,
-        color='purple',
-        label=
-        f'3rd Degree: y = {coef3[0]:.2f}x^3 + {coef3[1]:.2f}x^2 + {coef3[2]:.2f}x + {coef3[3]:.2f} | RR: {rr3:.2f}'
-    )
+    eq1 = f'y = {coef1[0]:.2f}x + {coef1[1]:.2f}'
+    eq2 = f'y = {coef2[0]:.2f}x^2 + {coef2[1]:.2f}x + {coef2[2]:.2f}'
+    eq3 = f'y = {coef3[0]:.2f}x^3 + {coef3[1]:.2f}x^2 + {coef3[2]:.2f}x + {coef3[3]:.2f}'
 
-    print(f'1st Degree: y = {m:.2f}x + {b:.2f}')
-    print(f'RR: {rr1:.2f}')
-    print(
-        f'2nd Degree: y = {coef2[0]:.2f}x^2 + {coef2[1]:.2f}x + {coef2[2]:.2f}'
-    )
-    print(f'RR: {rr2:.2f}')
-    print(
-        f'3rd Degree: y = {coef3[0]:.2f}x^3 + {coef3[1]:.2f}x^2 + {coef3[2]:.2f}x + {coef3[3]:.2f}'
-    )
-    print(f'RR: {rr3:.2f}')
+    plt.plot(x, y_pred1, color='red', label=f'1st Degree: {eq1} | RR: {rr1}')
+    plt.plot(x, y_pred2, color='green', label=f'2nd Degree: {eq2} | RR: {rr2}')
+    plt.plot(x,
+             y_pred3,
+             color='purple',
+             label=f'3rd Degree: {eq3} | RR: {rr3}')
+
+    print(f'1st Degree: {eq1}')
+    print(f'RR: {rr1}')
+
+    print(f'2nd Degree: {eq2}')
+    print(f'RR: {rr2}')
+
+    print(f'3rd Degree: {eq3}')
+    print(f'RR: {rr3}')
 
     # Add a title to the plot
     plt.title(biomarker)
@@ -248,9 +236,9 @@ def test_all_levels(biomarker_ranges, biomarker_data):
 
 # find_optimal_values()
 
-# generate_plots()
+generate_plots()
 
 # find_optimal_calc_values()
 
-predicted_age = request_age(optimal_biomarker_data)
-print('Predicted age: ' + str(predicted_age))
+# predicted_age = request_age(optimal_biomarker_data)
+# print('Predicted age: ' + str(predicted_age))
