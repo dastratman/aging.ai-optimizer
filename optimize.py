@@ -80,6 +80,20 @@ def calculate_2nd_degree(age_predictions, low_end, high_end):
     print(round(x_calc[index_of_lowest_value], 2))
 
 
+def calc_potential(data, optimal_data):
+    for biomarker_range in biomarker_ranges:
+        biomarker = biomarker_range['biomarker']
+
+        data_copy = copy.copy(data)
+        data_copy[biomarker] = optimal_data[biomarker]
+
+        print("Calculating new age when optimizing " + biomarker)
+
+        # Request predicted age
+        predicted_age = request_age(data_copy)
+        print("Prediction age: " + str(predicted_age))
+
+
 def find_optimal_calc_values():
     print(len(biomarker_ranges))
     for biomarker_range in biomarker_ranges:
@@ -236,9 +250,11 @@ def test_all_levels(biomarker_ranges, biomarker_data):
 
 # find_optimal_values()
 
-generate_plots()
+# generate_plots()
 
 # find_optimal_calc_values()
 
 # predicted_age = request_age(optimal_biomarker_data)
 # print('Predicted age: ' + str(predicted_age))
+
+calc_potential(biomarker_data, optimal_biomarker_data)
