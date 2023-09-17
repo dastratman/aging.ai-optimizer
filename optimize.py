@@ -98,7 +98,7 @@ def main():
     args = parser.parse_args()
 
     with open(args.metric_ranges_filename, 'r') as json_file:
-        print('Reading metric ranges from ' + args.metric_ranges)
+        print('Reading metric ranges from ' + args.metric_ranges_filename)
         biomarker_ranges = json.load(json_file)
 
     print('')
