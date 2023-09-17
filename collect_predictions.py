@@ -6,13 +6,13 @@ import argparse
 from common import request_age
 
 
-def save_predictions(biomarker, age_predictions):
-    with open("predictions/" + biomarker + ".json", "w") as file:
+def save_predictions(biomarker, age_predictions, predictions_directory):
+    with open(predictions_directory + biomarker + ".json", "w") as file:
         json.dump(age_predictions, file)
 
 
-def collect_predictions(biomarker, biomarker_range, step_count,
-                        biomarker_data):
+def collect_predictions(biomarker, biomarker_range, step_count, biomarker_data,
+                        predictions_directory):
 
     low_end = biomarker_range['low_end']
     high_end = biomarker_range['high_end']
@@ -44,7 +44,7 @@ def collect_predictions(biomarker, biomarker_range, step_count,
     print("\n### Finished calculations for " + biomarker + " ###\n")
 
     # Once all samples have been collected for a biomarker, save to a file
-    save_predictions(biomarker, age_predictions)
+    save_predictions(biomarker, age_predictions, predictions_directory)
 
 
 def main():
@@ -57,13 +57,17 @@ def main():
                         default="20")
 
     parser.add_argument(
-        "--biomarker_data",
+        "--biomarker_data_filename",
         help="filename with biomarker data values for collection iteration",
-        default="configs/sample_patient_05.json")
+        default="sample_data/patient_05.json")
 
-    parser.add_argument("--metric_ranges",
+    parser.add_argument("--metric_ranges_filename",
                         help="filename with acceptable metric ranges",
-                        default="configs/metric_ranges.json")
+                        default="metric_ranges.json")
+
+    parser.add_argument("--predictions_directory",
+                        help="directory to store aging.ai age predictions",
+                        default="predictions/temp/")
 
     parser.add_argument("--collect",
                         help="filename with acceptable metric ranges",
@@ -74,15 +78,15 @@ def main():
 
     args = parser.parse_args()
 
-    with open(args.biomarker_data, 'r') as json_file:
-        print('Reading biomarker data from ' + args.biomarker_data)
+    with open(args.biomarker_data_filename, 'r') as json_file:
+        print('Reading biomarker data from ' + args.biomarker_data_filename)
         biomarker_data = json.load(json_file)
 
     print('')
 
     if args.collect == True:
-        with open(args.metric_ranges, 'r') as json_file:
-            print('Reading metric ranges from ' + args.metric_ranges)
+        with open(args.metric_ranges_filename, 'r') as json_file:
+            print('Reading metric ranges from ' + args.metric_ranges_filename)
             biomarker_ranges = json.load(json_file)
 
         step_count = int(args.step_count)
@@ -94,13 +98,13 @@ def main():
             ]
 
             collect_predictions(args.biomarker, biomarker_range[0], step_count,
-                                biomarker_data)
+                                biomarker_data, args.predictions_directory)
         else:
             for biomarker_range in biomarker_ranges:
                 biomarker = biomarker_range['biomarker']
 
                 collect_predictions(biomarker, biomarker_range, step_count,
-                                    biomarker_data)
+                                    biomarker_data, args.predictions_directory)
     else:
         predicted_age = request_age(biomarker_data)
         print('Predicted age: ' + str(predicted_age))

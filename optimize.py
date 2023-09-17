@@ -6,7 +6,7 @@ import numpy as np
 
 
 def calculate_potential_improvement(biomarker, biomarker_data, optimal_data):
-    print("Calculating original age")
+    print("\nCalculating original age")
     original_predicted_age = request_age(biomarker_data)
     print("Original predicted age: " + str(original_predicted_age))
 
@@ -39,7 +39,7 @@ def calculate_optimal_value(age_predictions, low_end, high_end):
     return round(x_calc[index_of_lowest_value], 2)
 
 
-def calculate_optimal_values(biomarker_ranges):
+def calculate_optimal_values(biomarker_ranges, predictions_directory):
     print('Calculating optimal values for biomarkers')
     optimal_values = []
 
@@ -49,7 +49,8 @@ def calculate_optimal_values(biomarker_ranges):
         high_end = biomarker_range['high_end']
 
         age_predictions = []
-        with open("predictions/" + biomarker + ".json", 'r') as json_file:
+        with open(predictions_directory + biomarker + ".json",
+                  'r') as json_file:
             age_predictions = json.load(json_file)
 
         optimal_value = calculate_optimal_value(age_predictions, low_end,
@@ -67,17 +68,21 @@ def main():
         description="Collect predictions from Aging.ai.")
 
     # Define a flag
-    parser.add_argument("--biomarker_data",
+    parser.add_argument("--biomarker_data_filename",
                         help="filename with comparison biomarker data values",
-                        default="configs/sample_patient_05.json")
+                        default="sample_data/patient_05.json")
 
-    parser.add_argument("--optimal_values",
+    parser.add_argument("--optimal_values_filename",
                         help="filename with optimal biomarker data values",
-                        default="configs/optimal_values.json")
+                        default="sample_data/optimal_patient_05.json")
 
-    parser.add_argument("--metric_ranges",
+    parser.add_argument("--metric_ranges_filename",
                         help="filename with acceptable metric ranges",
-                        default="configs/metric_ranges.json")
+                        default="metric_ranges.json")
+
+    parser.add_argument("--predictions_directory",
+                        help="directory to store aging.ai age predictions",
+                        default="predictions/temp/")
 
     parser.add_argument("--biomarker",
                         help="only compare a specific biomarker")
@@ -87,26 +92,29 @@ def main():
                         default=True)
 
     parser.add_argument("--calculate_improvement",
-                        help="whether to calculate optimal values")
+                        help="whether to calculate optimal values",
+                        action="store_true")
 
     args = parser.parse_args()
 
-    with open(args.metric_ranges, 'r') as json_file:
+    with open(args.metric_ranges_filename, 'r') as json_file:
         print('Reading metric ranges from ' + args.metric_ranges)
         biomarker_ranges = json.load(json_file)
 
     print('')
 
-    if args.calculate_optimal_values:
-        calculate_optimal_values(biomarker_ranges)
+    if args.calculate_optimal_values and not args.calculate_improvement:
+        calculate_optimal_values(biomarker_ranges, args.predictions_directory)
 
     if args.calculate_improvement:
-        with open(args.biomarker_data, 'r') as json_file:
-            print('Reading control biomarker data from ' + args.biomarker_data)
+        with open(args.biomarker_data_filename, 'r') as json_file:
+            print('Reading control biomarker data from ' +
+                  args.biomarker_data_filename)
             biomarker_data = json.load(json_file)
 
-        with open(args.optimal_values, 'r') as json_file:
-            print('Reading optimal biomarker data from ' + args.optimal_values)
+        with open(args.optimal_values_filename, 'r') as json_file:
+            print('Reading optimal biomarker data from ' +
+                  args.optimal_values_filename)
             optimal_data = json.load(json_file)
 
         if args.biomarker:
