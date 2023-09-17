@@ -1,0 +1,97 @@
+[
+    {
+        "biomarker": "Albumin",
+        "low_end": 3.5,
+        "high_end": 5.5
+    },
+    {
+        "biomarker": "Glucose",
+        "low_end": 65.0,
+        "high_end": 99.0
+    },
+    {
+        "biomarker": "Urea",
+        "low_end": 6.0,
+        "high_end": 24.0
+    },
+    {
+        "biomarker": "Cholesterol",
+        "low_end": 100.0,
+        "high_end": 199.0
+    },
+    {
+        "biomarker": "Protein_total",
+        "low_end": 6.0,
+        "high_end": 8.5
+    },
+    {
+        "biomarker": "Sodium",
+        "low_end": 134.0,
+        "high_end": 144.0
+    },
+    {
+        "biomarker": "Creatinine",
+        "low_end": 0.57,
+        "high_end": 1.0
+    },
+    {
+        "biomarker": "Hemoglobin",
+        "low_end": 11.1,
+        "high_end": 15.9
+    },
+    {
+        "biomarker": "Bilirubin_total",
+        "low_end": 0.05,
+        "high_end": 1.2
+    },
+    {
+        "biomarker": "Triglycerides",
+        "low_end": 5.0,
+        "high_end": 149.0
+    },
+    {
+        "biomarker": "HDL_Cholesterol",
+        "low_end": 39.0,
+        "high_end": 100.0
+    },
+    {
+        "biomarker": "LDL_cholesterol",
+        "low_end": 5.0,
+        "high_end": 99.0
+    },
+    {
+        "biomarker": "Calcium",
+        "low_end": 8.7,
+        "high_end": 10.2
+    },
+    {
+        "biomarker": "Potassium",
+        "low_end": 3.5,
+        "high_end": 5.2
+    },
+    {
+        "biomarker": "Hematocrit",
+        "low_end": 37.0,
+        "high_end": 50.0
+    },
+    {
+        "biomarker": "MCHC",
+        "low_end": 31.5,
+        "high_end": 35.7
+    },
+    {
+        "biomarker": "MCV",
+        "low_end": 79.0,
+        "high_end": 97.0
+    },
+    {
+        "biomarker": "Platelets",
+        "low_end": 150,
+        "high_end": 379
+    },
+    {
+        "biomarker": "Erythrocytes",
+        "low_end": 3.77,
+        "high_end": 5.28
+    }
+]
