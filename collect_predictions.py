@@ -85,6 +85,7 @@ def main():
     print('')
 
     if args.collect == True:
+        biomarker_ranges = []
         with open(args.metric_ranges_filename, 'r') as json_file:
             print('Reading metric ranges from ' + args.metric_ranges_filename)
             biomarker_ranges = json.load(json_file)
