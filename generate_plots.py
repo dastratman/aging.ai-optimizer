@@ -25,11 +25,12 @@ def calculate_coefficient_of_determination(x, y, degree):
     return r2
 
 
-def calculate_regression(biomarker, show_plot, save_plot):
+def calculate_regression(biomarker, show_plot, save_plot,
+                         predictions_directory, plots_directory):
     print('\nPlotting ' + biomarker)
 
     age_predictions = []
-    with open("predictions/" + biomarker + ".json", 'r') as json_file:
+    with open(predictions_directory + biomarker + ".json", 'r') as json_file:
         age_predictions = json.load(json_file)
 
     x_list = [item['value'] for item in age_predictions]
@@ -56,25 +57,25 @@ def calculate_regression(biomarker, show_plot, save_plot):
     plt.scatter(x, y, color='blue', label='Data points')
 
     # Plot the polynomial regression lines
-    eq1 = f'y = {coef1[0]:.2f}x + {coef1[1]:.2f}'
+    # eq1 = f'y = {coef1[0]:.2f}x + {coef1[1]:.2f}'
     eq2 = f'y = {coef2[0]:.2f}x^2 + {coef2[1]:.2f}x + {coef2[2]:.2f}'
-    eq3 = f'y = {coef3[0]:.2f}x^3 + {coef3[1]:.2f}x^2 + {coef3[2]:.2f}x + {coef3[3]:.2f}'
+    # eq3 = f'y = {coef3[0]:.2f}x^3 + {coef3[1]:.2f}x^2 + {coef3[2]:.2f}x + {coef3[3]:.2f}'
 
-    plt.plot(x, y_pred1, color='red', label=f'1st Degree: {eq1} | RR: {rr1}')
+    # plt.plot(x, y_pred1, color='red', label=f'1st Degree: {eq1} | RR: {rr1}')
     plt.plot(x, y_pred2, color='green', label=f'2nd Degree: {eq2} | RR: {rr2}')
-    plt.plot(x,
-             y_pred3,
-             color='purple',
-             label=f'3rd Degree: {eq3} | RR: {rr3}')
+    # plt.plot(x,
+    #          y_pred3,
+    #          color='purple',
+    #          label=f'3rd Degree: {eq3} | RR: {rr3}')
 
-    print(f'1st Degree: {eq1}')
-    print(f'RR: {rr1}')
+    # print(f'1st Degree: {eq1}')
+    # print(f'RR: {rr1}')
 
     print(f'2nd Degree: {eq2}')
     print(f'RR: {rr2}')
 
-    print(f'3rd Degree: {eq3}')
-    print(f'RR: {rr3}')
+    # print(f'3rd Degree: {eq3}')
+    # print(f'RR: {rr3}')
 
     # Add a title to the plot
     plt.title(biomarker)
@@ -85,16 +86,18 @@ def calculate_regression(biomarker, show_plot, save_plot):
         plt.show()
     if save_plot:
         # Save the plot to an image file with 300 DPI
-        plt.savefig('plots/' + biomarker + '.png', dpi=300)
+        plt.savefig(plots_directory + biomarker + '.png', dpi=300)
 
     plt.close('all')
 
 
-def generate_all_plots(show_plot, save_plot):
-    for filename in os.listdir("predictions"):
+def generate_all_plots(show_plot, save_plot, predictions_directory,
+                       plots_directory):
+    for filename in os.listdir(predictions_directory):
         if filename.endswith('.json'):
             biomarker = filename.replace('.json', '')
-            calculate_regression(biomarker, show_plot, save_plot)
+            calculate_regression(biomarker, show_plot, save_plot,
+                                 predictions_directory, plots_directory)
 
 
 def main():
@@ -105,27 +108,32 @@ def main():
     # Define a flag
     parser.add_argument("--save_plot",
                         help="save plot images",
-                        action="store_true")
+                        action="store_true",
+                        default=True)
 
     parser.add_argument("--show_plot",
                         help="save plot images",
-                        action="store_true")
+                        action="store_true",
+                        default=False)
+
+    parser.add_argument("--predictions_directory",
+                        help="directory to store aging.ai age predictions",
+                        default="predictions/patient_05/")
+
+    parser.add_argument("--plots_directory",
+                        help="directory to store biomarker plots",
+                        default="plots/patient_05/")
 
     parser.add_argument("--biomarker", help="only plot a specific biomarker")
 
     args = parser.parse_args()
 
     if args.biomarker:
-        calculate_regression(
-            args.biomarker,
-            show_plot=args.show_plot,
-            save_plot=args.save_plot,
-        )
+        calculate_regression(args.biomarker, args.show_plot, args.save_plot,
+                             args.predictions_directory, args.plots_directory)
     else:
-        generate_all_plots(
-            show_plot=args.show_plot,
-            save_plot=args.save_plot,
-        )
+        generate_all_plots(args.show_plot, args.save_plot,
+                           args.predictions_directory, args.plots_directory)
 
 
 if __name__ == "__main__":

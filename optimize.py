@@ -6,10 +6,6 @@ import numpy as np
 
 
 def calculate_potential_improvement(biomarker, biomarker_data, optimal_data):
-    print("\nCalculating original age")
-    original_predicted_age = request_age(biomarker_data)
-    print("Original predicted age: " + str(original_predicted_age))
-
     data_copy = copy.copy(biomarker_data)
     data_copy[biomarker] = optimal_data[biomarker]
 
@@ -89,11 +85,13 @@ def main():
 
     parser.add_argument("--calculate_optimal_values",
                         help="whether to calculate optimal values",
+                        action="store_true",
                         default=True)
 
     parser.add_argument("--calculate_improvement",
                         help="whether to calculate optimal values",
-                        action="store_true")
+                        action="store_true",
+                        default=False)
 
     args = parser.parse_args()
 
@@ -121,6 +119,9 @@ def main():
             calculate_potential_improvement(args.biomarker, biomarker_data,
                                             optimal_data)
         else:
+            print("\nCalculating original age")
+            original_predicted_age = request_age(biomarker_data)
+            print("Original predicted age: " + str(original_predicted_age))
             for biomarker_range in biomarker_ranges:
                 biomarker = biomarker_range['biomarker']
                 calculate_potential_improvement(biomarker, biomarker_data,
