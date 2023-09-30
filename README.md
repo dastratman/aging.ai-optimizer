@@ -1,5 +1,7 @@
 # aging.ai-optimizer
 
+## Collecting predictions
+
 Request the aging.ai prediction for a set of biometric data:
 
 ```
@@ -18,11 +20,15 @@ Collect predictions for *all* biomarkers, iterating through each one:
 $ python collect_predictions.py --biomarker_data_filename sample_data/patient_05.json --predictions_directory predictions/patient_05/
 ```
 
+## Plotting
+
 Generate scatter plots and regressions of the predictions:
 
 ```
-$ python generate_plots.py --predictions_directory predictions/patient_05/ --plots_directory plots/patient_05/
+$ python generate_plots.py --predictions_directory predictions/patient_05/ --plots_directory plots/patient_05/ --biomarker_data_filename sample_data/patient_05.json
 ```
+
+## Calculating optimal values
 
 Calculate the optimal value for each biomarker for a given set of predictions:
 

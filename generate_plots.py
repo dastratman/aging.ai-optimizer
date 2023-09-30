@@ -3,6 +3,7 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import argparse
+from common import request_age
 
 
 def calculate_coefficient_of_determination(x, y, degree):
@@ -26,60 +27,53 @@ def calculate_coefficient_of_determination(x, y, degree):
 
 
 def calculate_regression(biomarker, show_plot, save_plot,
-                         predictions_directory, plots_directory):
+                         predictions_directory, plots_directory,
+                         biomarker_data, predicted_age):
     print('\nPlotting ' + biomarker)
 
     age_predictions = []
     with open(predictions_directory + biomarker + ".json", 'r') as json_file:
         age_predictions = json.load(json_file)
 
+    # Create arrays containing biometric values
+    print(biomarker_data[biomarker])
+    x_b = np.array([[float(biomarker_data[biomarker])]])
+    y_b = np.array([[predicted_age]])
+
+    # Create arrays containing prediction values
     x_list = [item['value'] for item in age_predictions]
     y_list = [item['predicted_age'] for item in age_predictions]
 
     x = np.array(x_list)
     y = np.array(y_list)
 
-    coef1 = np.polyfit(x, y, 1)
-    y_pred1 = np.polyval(coef1, x)
-    rr1 = round(calculate_coefficient_of_determination(x, y, 1), 2)
-
     # Fit 2nd degree polynomial
     coef2 = np.polyfit(x, y, 2)
     y_pred2 = np.polyval(coef2, x)
     rr2 = round(calculate_coefficient_of_determination(x, y, 2), 2)
 
-    # Fit 3rd degree polynomial
-    coef3 = np.polyfit(x, y, 3)
-    y_pred3 = np.polyval(coef3, x)
-    rr3 = round(calculate_coefficient_of_determination(x, y, 3), 2)
-
-    # Plot the data
-    plt.scatter(x, y, color='blue', label='Data points')
+    # Plot the prediction data
+    plt.scatter(x, y, color='blue', label='Predictions')
 
     # Plot the polynomial regression lines
-    # eq1 = f'y = {coef1[0]:.2f}x + {coef1[1]:.2f}'
     eq2 = f'y = {coef2[0]:.2f}x^2 + {coef2[1]:.2f}x + {coef2[2]:.2f}'
-    # eq3 = f'y = {coef3[0]:.2f}x^3 + {coef3[1]:.2f}x^2 + {coef3[2]:.2f}x + {coef3[3]:.2f}'
+    plt.plot(x, y_pred2, color='green', label=f'Equation: {eq2} | RR: {rr2}')
 
-    # plt.plot(x, y_pred1, color='red', label=f'1st Degree: {eq1} | RR: {rr1}')
-    plt.plot(x, y_pred2, color='green', label=f'2nd Degree: {eq2} | RR: {rr2}')
-    # plt.plot(x,
-    #          y_pred3,
-    #          color='purple',
-    #          label=f'3rd Degree: {eq3} | RR: {rr3}')
+    # Plot the biometric data
+    plt.scatter(x_b, y_b, color='red', label='Actual')
 
-    # print(f'1st Degree: {eq1}')
-    # print(f'RR: {rr1}')
-
-    print(f'2nd Degree: {eq2}')
+    print(f'Equation: {eq2}')
     print(f'RR: {rr2}')
-
-    # print(f'3rd Degree: {eq3}')
-    # print(f'RR: {rr3}')
 
     # Add a title to the plot
     plt.title(biomarker)
+
+    # Add a legend
+    plt.xlabel('Biomarker Value')
+    plt.ylabel('Predicted Age')
     plt.legend()
+
+    # Add a grid
     plt.grid(True)
 
     if show_plot:
@@ -92,12 +86,13 @@ def calculate_regression(biomarker, show_plot, save_plot,
 
 
 def generate_all_plots(show_plot, save_plot, predictions_directory,
-                       plots_directory):
+                       plots_directory, biomarker_data, predicted_age):
     for filename in os.listdir(predictions_directory):
         if filename.endswith('.json'):
             biomarker = filename.replace('.json', '')
             calculate_regression(biomarker, show_plot, save_plot,
-                                 predictions_directory, plots_directory)
+                                 predictions_directory, plots_directory,
+                                 biomarker_data, predicted_age)
 
 
 def main():
@@ -116,6 +111,11 @@ def main():
                         action="store_true",
                         default=False)
 
+    parser.add_argument(
+        "--biomarker_data_filename",
+        help="filename with biomarker data values for collection iteration",
+        default="sample_data/patient_05.json")
+
     parser.add_argument("--predictions_directory",
                         help="directory to store aging.ai age predictions",
                         default="predictions/patient_05/")
@@ -128,12 +128,20 @@ def main():
 
     args = parser.parse_args()
 
+    with open(args.biomarker_data_filename, 'r') as json_file:
+        print('Reading biomarker data from ' + args.biomarker_data_filename)
+        biomarker_data = json.load(json_file)
+
+    predicted_age = request_age(biomarker_data)
+
     if args.biomarker:
         calculate_regression(args.biomarker, args.show_plot, args.save_plot,
-                             args.predictions_directory, args.plots_directory)
+                             args.predictions_directory, args.plots_directory,
+                             biomarker_data, predicted_age)
     else:
         generate_all_plots(args.show_plot, args.save_plot,
-                           args.predictions_directory, args.plots_directory)
+                           args.predictions_directory, args.plots_directory,
+                           biomarker_data, predicted_age)
 
 
 if __name__ == "__main__":
