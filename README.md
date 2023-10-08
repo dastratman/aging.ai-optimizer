@@ -1,5 +1,16 @@
 # aging.ai-optimizer
 
+## Set up your virtual environment
+
+[How to Set Up a Virtual Environment in Python – And Why It's Useful](https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/)
+
+```
+$ virtualenv --system-site-packages -p python ./venv
+
+$ venv\Scripts\activate.bat
+
+$ pip install
+```
 ## Collecting predictions
 
 Request the aging.ai prediction for a set of biometric data:
